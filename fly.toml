@@ -1,0 +1,28 @@
+# fly.toml file generated for rc-ics-filter on 2022-09-30T10:16:36-04:00
+
+app = "rc-ics-filter"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+
+[experimental]
+cmd = "./ics-filter"
+
+[[services]]
+internal_port = 3000
+protocol = "tcp"
+
+[services.concurrency]
+hard_limit = 25
+soft_limit = 20
+
+[[services.ports]]
+force_https = true
+handlers = ["http"]
+port = 80
+
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
